@@ -1,0 +1,26 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ethereum-e21aa68b.svg" clip-path="url(#clip0_9_2006)">
+<g id="Clip path group">
+<mask id="mask0_9_2006" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+<g id="a">
+<path id="Vector" d="M0 0H24V24H0V0Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_9_2006)">
+<g id="Group">
+<path id="Vector_2" d="M11.993 0L11.832 0.54696V16.4158L11.993 16.5763L19.3589 12.2222L11.993 0Z" fill="#F48975"/>
+<path id="Vector_3" d="M12.0028 0L4.63672 12.2222L12.0028 16.5763V0Z" fill="#F9ED67"/>
+<path id="Vector_4" d="M11.9931 17.9717L11.9023 18.0824V23.7352L11.9928 24L19.3633 13.6199L11.9931 17.9717Z" fill="#667BBE"/>
+<path id="Vector_5" d="M12.0028 24V17.9717L4.63672 13.6199L12.0028 24Z" fill="#0DB2D0"/>
+<path id="Vector_6" d="M11.9965 16.576L19.3624 12.2219L11.9966 8.87366L11.9965 16.576Z" fill="#9C68AA"/>
+<path id="Vector_7" d="M4.63672 12.222L12.0028 16.5761V8.8739L4.63672 12.222Z" fill="#50BB77"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_9_2006">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>
