@@ -19,8 +19,8 @@ export const PageHeading = ({ text, color, textAlign }) => {
 export const SmallText = ({ text, color, textAlign }) => {
   return (
     <Text
-      color={color || "lightText"}
-      fontSize="15px"
+      color={color || "brand.lighterText"}
+      fontSize="23px"
       fontWeight="400"
       textAlign={textAlign || "left"}
     >
@@ -33,8 +33,8 @@ export const MediumText = ({ text, color, textAlign }) => {
   return (
     <Text
       textAlign={textAlign || "left"}
-      color={color || "lightText"}
-      fontSize="19px"
+      color={color || "brand.lightText"}
+      fontSize="25px"
       fontWeight="400"
     >
       {text}

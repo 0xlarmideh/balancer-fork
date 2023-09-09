@@ -8,11 +8,19 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+  background-color: #070E0C;
+
 }
 
 main {
   background-color: #070E0C;
   min-height: 100vh;
+}
+
+footer {
+  background-color: #001610;
+  color: #EDEDED;
+  padding: 0px 0 48px 0;
 }
 
 
