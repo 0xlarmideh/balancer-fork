@@ -1,6 +1,12 @@
 import { Text } from "@chakra-ui/react";
 
-export const PageHeading = ({ text, color, textAlign }) => {
+interface ITextprops {
+  text: string;
+  color?: string;
+  textAlign?: any
+}
+
+export const PageHeading = ({ text, color, textAlign }:ITextprops) => {
   return (
     <Text
       as="h1"
@@ -16,7 +22,7 @@ export const PageHeading = ({ text, color, textAlign }) => {
   );
 };
 
-export const SmallText = ({ text, color, textAlign }) => {
+export const SmallText = ({ text, color, textAlign }:ITextprops) => {
   return (
     <Text
       color={color || "brand.lighterText"}
@@ -29,7 +35,7 @@ export const SmallText = ({ text, color, textAlign }) => {
   );
 };
 
-export const MediumText = ({ text, color, textAlign }) => {
+export const MediumText = ({ text, color, textAlign }:ITextprops) => {
   return (
     <Text
       textAlign={textAlign || "left"}

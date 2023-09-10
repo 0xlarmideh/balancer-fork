@@ -1,6 +1,7 @@
-import MaxWidth from '@/components/_common/MaxWidth'
+
 import React from 'react'
 import Header from './Header'
+import MaxWidth from '../../_common/MaxWidth'
 
 const PoolPage = () => {
   return (

@@ -17,6 +17,10 @@ main {
   min-height: 100vh;
 }
 
+nav {
+  background-color: #001610;
+}
+
 footer {
   background-color: #001610;
   color: #EDEDED;

@@ -1,6 +1,19 @@
 import { Button } from "@chakra-ui/react"
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
-export const FilledButton = ({onClick, text, bgColor, className, leftIcon, px, isLoading}) => {
+interface IButtonProps {
+  onClick?: () => void;
+  text: string;
+  bgColor?: string;
+  className?: string;
+  color?: string;
+  width?: any;
+  isLoading?: boolean;
+  leftIcon?: ReactJSXElement;
+  px?: any;
+}
+
+export const FilledButton = ({onClick, text, bgColor, className, leftIcon, px, isLoading}:IButtonProps) => {
   return (
     <Button
       onClick={(e) => {
@@ -35,10 +48,8 @@ export const FilledFullButton = ({
   text,
   bgColor,
   className,
-  color,
-  width,
   isLoading,
-}) => {
+}:IButtonProps) => {
   return (
     <Button
       onClick={(e) => {

@@ -22,6 +22,9 @@ const Pools = () => {
             fontWeight='400'
             color="brand.darkerText"
             placeholder="Filter by token"
+            onChange={() => {
+              // Function goes here
+            }}
           />
         </InputGroup>
         <FilledButton text='Create a pool' px='24px' leftIcon={<AiOutlinePlus />} />

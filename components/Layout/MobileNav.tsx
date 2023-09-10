@@ -1,37 +1,27 @@
 import {
   Box,
-  Button,
-  Flex,
-  HStack,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  PopoverArrow,
-  Text,
+  Drawer,
+  Divider,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  VStack,
+  Link,
+  Text
 } from "@chakra-ui/react";
-import Image from "next/image";
-import React from "react";
-import PhanesLogo from "@/public/images/Phanes.png";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { FilledButton } from "../_common/Buttons";
-import ETHLogo from "@/public/icons/eth.svg";
 
-const Navbar = () => {
-  const routes = [
-    {
-      path: "/",
-      title: "Pools",
-    },
-    {
-      path: "/swap",
-      title: "Swap",
-    },
-    { path: "/claim", title: "claim" },
-    { path: "/portfolio", title: "portfolio" },
-  ];
-  const router = useRouter();
+interface IMobileProps {
+  isOpen: boolean;
+  onClose: () => void;
+  data: {title: string, path: string}[]
+}
+const MobileNav = ({ isOpen, onClose, data }: IMobileProps) => {
+  const router = useRouter()
   const ConnectIcon = () => {
     return (
       <>
@@ -61,49 +51,60 @@ const Navbar = () => {
     );
   };
   return (
-    <nav>
-      <Box py="40px" px="64px" bg="brand.lightBg">
-        <Flex justify="space-between" align="center">
-          <Image src={PhanesLogo} alt="Phanes Logo" />
-          <HStack spacing={8} align="center">
-            {routes.map((route, i) => (
-              <Link key={i} href={route?.path}>
+    <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+      <DrawerOverlay />
+      <DrawerContent
+        boxShadow="12px 12px 64px 0px rgba(16, 123, 92, 0.60)"
+        maxW="90%"
+        bg="#001610"
+      >
+        <DrawerCloseButton
+          color="brand.lightText"
+          fontSize="27px"
+          top="1.8rem"
+          right="1.2rem"
+        />
+        <DrawerBody mt="6rem">
+          {/* <VStack
+            display={{ base: "none", md: "flex" }}
+            spacing={2}
+            align="center"
+          > */}
+          {data.map((route, i) => (
+            <Box key={i}>
+              <Link href={route?.path}>
                 <Text
                   textTransform="capitalize"
                   fontWeight="600"
-                  fontSize="24px"
+                  fontSize="21px"
                   color={
                     router.asPath === route?.path ? "brand.phanes" : "white"
                   }
+                  _hover={{
+                    transform: "scaleX(1.05)",
+                    opacity: 0.85,
+                    transition: "all 0.6s",
+                  }}
                 >
                   {route?.title}
                 </Text>
               </Link>
-            ))}
-          </HStack>
-          <HStack spacing={2} align="center">
-            <Menu>
-              <MenuButton as={Button} variant="unstyled" bg="none">
-                <HStack p={2} border="#1BD19C 1px solid" rounded="8px">
-                  <Image src={ETHLogo} alt="eth logo" />
-                </HStack>
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Wallet List</MenuItem>
-              </MenuList>
-            </Menu>
-            <FilledButton
-              text={"Connect Wallet"}
-              leftIcon={<ConnectIcon />}
-              onClick={() => {
-                console.log("clicked");
-              }}
-            />
-          </HStack>
-        </Flex>
-      </Box>
-    </nav>
+
+              <Divider color="brand.lightText" my="18px" />
+            </Box>
+          ))}
+          <FilledButton
+            text={"Connect Wallet"}
+            leftIcon={<ConnectIcon />}
+            onClick={() => {
+              console.log("clicked");
+            }}
+          />
+          {/* </VStack> */}
+        </DrawerBody>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
-export default Navbar;
+export default MobileNav;

@@ -29,7 +29,7 @@ const Footer = () => {
           >
             {/* Logo */}
             <Image src={PhanesLogo} alt="Phanes Logo" />
-            <HStack spacing={6}>
+            <HStack spacing={4}>
               {FooterLinks.map((link, idx) => (
                 <Link
                   fontSize="19px"

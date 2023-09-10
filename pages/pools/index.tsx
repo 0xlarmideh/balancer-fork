@@ -1,0 +1,7 @@
+const SwapPage = () => {
+  return (
+    <></>
+  )
+}
+
+SwapPage
