@@ -1,9 +1,14 @@
 import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/react";
-import React from "react";
-
-const CustomModal = ({ isOpen, onClose, content, maxW }) => {
+import React, { ReactElement } from "react";
+interface IModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  content: ReactElement;
+  maxW: any;
+}
+const CustomModal = ({ isOpen, onClose, content, maxW }: IModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isCentered isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
         borderRadius="12px"

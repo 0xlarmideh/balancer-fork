@@ -1,12 +1,14 @@
 import { FilledButton } from '@/components/_common/Buttons'
 import { MediumText } from '@/components/_common/Typography'
-import { Box, Divider, Flex, Input, InputGroup, InputLeftElement, Text } from '@chakra-ui/react'
+import { Box, Divider, Flex, Input, InputGroup, InputLeftElement, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import { CiSearch } from "react-icons/ci"
 import { AiOutlinePlus } from "react-icons/ai";
 import PoolTable from './PoolTable'
+import Step1 from './Modals/Step1'
 
 const Pools = () => {
+  const {isOpen, onClose, onOpen} = useDisclosure();
   return (
     <Box pb='12rem'>
       <MediumText text="OpBnB pools" />
@@ -27,9 +29,13 @@ const Pools = () => {
             }}
           />
         </InputGroup>
-        <FilledButton text='Create a pool' px='24px' leftIcon={<AiOutlinePlus />} />
+        <FilledButton onClick={() => {
+          onOpen();
+        }} 
+        text='Create a pool' px='24px' leftIcon={<AiOutlinePlus />} />
       </Flex>
       <PoolTable />
+      <Step1 isOpen={isOpen} onClose={onClose} key='step1' />
     </Box>
   );
 }
