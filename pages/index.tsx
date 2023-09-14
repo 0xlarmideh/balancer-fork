@@ -6,19 +6,22 @@ import MaxWidth from '@/components/_common/MaxWidth'
 import Header from '@/components/Pages Components/Pools/Header'
 import Pools from '@/components/Pages Components/Pools/Pools'
 import Layout from '@/components/Layout/Layout'
+import { PoolStateContextProvider } from '@/context/PoolsContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <Layout>
-      <main>
-        {/* <FilledButton text='Connect wallet' /> */}
-        <MaxWidth>
-          <Header />
-          <Pools />
-        </MaxWidth>
-      </main>
-    </Layout>
+    <PoolStateContextProvider>
+      <Layout>
+        <main>
+          {/* <FilledButton text='Connect wallet' /> */}
+          <MaxWidth>
+            <Header />
+            <Pools />
+          </MaxWidth>
+        </main>
+      </Layout>
+    </PoolStateContextProvider>
   );
 }

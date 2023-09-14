@@ -5,7 +5,7 @@ import React from 'react'
 import { CiSearch } from "react-icons/ci"
 import { AiOutlinePlus } from "react-icons/ai";
 import PoolTable from './PoolTable'
-import Step1 from './Modals/Step1'
+import BaseModal from './Modals/BaseModal'
 
 const Pools = () => {
   const {isOpen, onClose, onOpen} = useDisclosure();
@@ -35,7 +35,7 @@ const Pools = () => {
         text='Create a pool' px='24px' leftIcon={<AiOutlinePlus />} />
       </Flex>
       <PoolTable />
-      <Step1 isOpen={isOpen} onClose={onClose} key='step1' />
+      <BaseModal isOpen={isOpen} onClose={onClose} key='step1' />
     </Box>
   );
 }
