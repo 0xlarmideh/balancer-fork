@@ -27,7 +27,7 @@ export const SmallText = ({ text, color, textAlign }:ITextprops) => {
     <Text
       color={color || "brand.lighterText"}
       fontSize="23px"
-      fontWeight="400"
+      fontWeight="500"
       textAlign={textAlign || "left"}
     >
       {text}

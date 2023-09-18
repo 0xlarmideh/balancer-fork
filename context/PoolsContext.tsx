@@ -24,7 +24,7 @@ export const PoolStateContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [currentStep, setCurrentStep] = useState<number>(0);
   const [poolType, setPoolType] = useState<poolType>(null)
   // const [formValues, setFormValues] =
   //   useState<any>(initialData);

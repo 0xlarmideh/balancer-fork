@@ -34,7 +34,7 @@ console.log(currentStep)
     ];
     return (
       <>
-        <CustomStepper />
+        {/* <CustomStepper /> */}
         <Flex px="14px" py="30px" flexDir="column" gap="24px">
           {ModalContentData.map((item, idx) => {
             return (
@@ -53,7 +53,7 @@ console.log(currentStep)
                 onClick={() => {
                   // function goes here
                   setPoolType(item?.poolType);
-                  setCurrentStep(2);
+                  setCurrentStep(1);
                 }}
                 key={idx}
               >
