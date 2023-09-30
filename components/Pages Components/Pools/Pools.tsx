@@ -20,24 +20,24 @@ import Step1 from "./Modals/weighted/Step1";
 import CustomModal from "@/components/_common/CustomModal";
 import Step2 from "./Modals/weighted/Step2";
 import Step3 from "./Modals/weighted/Step3";
+import Step2Details from "./Modals/weighted/Step2Details";
+import { useState } from "react";
 
 const Pools = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const [showDetails, setShowDetails] = useState(false);
   const {
     isOpen: isWeightedOpen,
     onClose: onWeightedClose,
     onOpen: onWeightedOpen,
   } = useDisclosure();
-  const { setCurrentStep, currentStep, poolDetails, updatePoolDetail } = usePoolsContext();
-
-  const PoolsModals = {
-    weighted_pool: {
-      1: <Step1 />,
-    },
-    stable_pool: {
-      // 1: <Step1 />
-    },
-  };
+  const {
+    setCurrentStep,
+    currentStep,
+    poolDetails,
+    updatePoolDetail,
+    clearPoolDetail,
+  } = usePoolsContext();
 
   return (
     <Box pb="12rem">
@@ -87,13 +87,23 @@ const Pools = () => {
           onClose={() => {
             onWeightedClose();
             setCurrentStep(0);
-            updatePoolDetail("poolType", null);
+            clearPoolDetail();
+            setShowDetails(false);
           }}
           maxW={{ base: "100%", md: "1174px" }}
         >
           {currentStep === 1 && <Step1 />}
-          {currentStep === 2 && <Step2 />}
+          {currentStep === 2 && (
+            <>
+              {!showDetails ? (
+                <Step2 setShowDetails={setShowDetails} />
+              ) : (
+                <Step2Details setShowDetails={setShowDetails} />
+              )}
+            </>
+          )}
           {currentStep === 3 && <Step3 />}
+          {/* {currentStep === 4 && <Step4 />} */}
         </CustomModal>
       )}
     </Box>

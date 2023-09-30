@@ -1,3 +1,4 @@
+import { ModalCTABtn } from "@/components/_common/Buttons";
 import { usePoolsContext } from "@/context/PoolsContext";
 import {
   Box,
@@ -9,8 +10,10 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { FaChevronLeft } from "react-icons/fa";
-
-const Step2 = () => {
+export type IStep2 = {
+  setShowDetails: (value: boolean) => void
+}
+const Step2 = ({setShowDetails}:IStep2) => {
   const {goNext, updatePoolDetail, poolDetails: {poolFees}} = usePoolsContext()
   const initialSwapFees = [0.1, 0.3, 1.1, 1.2];
   return (
@@ -34,39 +37,31 @@ const Step2 = () => {
           {initialSwapFees.map((fee) => {
             const color = poolFees === fee ? "#1BD19C" : "#EAFFF9";
             return (
-            <Box
-              fontWeight="600"
-              fontSize="23px"
-              color={color}
-              p="12px 8px"
-              border={`1px solid ${color}`}
-              borderRadius="8px"
-              _hover={{ cursor: "pointer" }}
-              onClick={() => {
-                updatePoolDetail("poolFees", fee);
-              }}
-            >
-              {`${fee}`}%
-            </Box>
-          )})}
+              <Box
+                fontWeight="600"
+                fontSize="23px"
+                color={color}
+                p="12px 8px"
+                border={`1px solid ${color}`}
+                borderRadius="8px"
+                _hover={{ cursor: "pointer" }}
+                onClick={() => {
+                  updatePoolDetail("poolFees", fee);
+                }}
+              >
+                {`${fee}`}%
+              </Box>
+            );
+          })}
         </Flex>
         <Text mb="12px" fontWeight="600" fontSize="19px" color="#A4C8BE">
           Phanes network manage pool fees
         </Text>
-        <Button
-          border="1px solid #1bd19c"
-          borderRadius="8px"
-          bg="#1BD19C"
-          py="27px"
-          fontSize="23px"
-          fontWeight="600"
-          color="white"
-          w="100%"
+        <ModalCTABtn
           disabled={!poolFees}
-          onClick={goNext}
-        >
-          Next
-        </Button>
+          onClick={() => setShowDetails(true)}
+          text="Next"
+        />
       </Box>
     </Box>
   );

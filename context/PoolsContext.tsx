@@ -10,6 +10,7 @@ type IPoolFormType = {
 type PoolsContextType = {
   poolDetails: IPoolFormType;
   updatePoolDetail: (fieldName: keyof IPoolFormType, value: any) => void;
+  clearPoolDetail: () => void;
   currentStep: number;
   setCurrentStep: Dispatch<SetStateAction<number>>;
   goBack: () => void;
@@ -41,6 +42,10 @@ export const PoolStateContextProvider = ({
     }));
   };
 
+  const clearPoolDetail = () => {
+    setPoolDetails(initialData);
+  }
+
   const goBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
@@ -52,6 +57,7 @@ export const PoolStateContextProvider = ({
   const contextValue: PoolsContextType = {
     poolDetails,
     updatePoolDetail,
+    clearPoolDetail,
     currentStep,
     setCurrentStep,
     goBack,

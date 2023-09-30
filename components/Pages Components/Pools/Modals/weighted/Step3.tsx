@@ -1,128 +1,132 @@
+import React, { useState } from "react";
+import { Box, Text, Flex, HStack, VStack, Switch, Input } from "@chakra-ui/react";
+import { FaChevronLeft } from "react-icons/fa";
+import { tokensLiquidity } from "./Step2Details";
+import Image from "next/image";
+import { ModalCTABtn } from "@/components/_common/Buttons";
 import { usePoolsContext } from "@/context/PoolsContext";
-import { Box, Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
-import { BiEdit } from "react-icons/bi";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 const Step3 = () => {
-  const {
-    goNext,
-    goBack,
-    setCurrentStep,
-    poolDetails: { poolFees, poolType},
-  } = usePoolsContext();
-
-  const tokensLiquidity = [
-    { token: "ETH", percentage: 50, price: 0.2342, weightPrice: 1750 },
-    { token: "DAI", percentage: 50, price: 0.2342, weightPrice: 1750 },
-  ];
-
-  const totalWeightPrice = tokensLiquidity
-    .map(({ weightPrice }) => weightPrice)
-    .reduce((acc, curr) => acc + curr);
-
-  const TextStyle = ({ text, fontWeight }: any) => (
-    <Text fontWeight={fontWeight || "600"} color="#EAFFF9" fontSize="19px">
-      {text}
-    </Text>
-  );
+  const [liquidity, setLiquidity] = useState(tokensLiquidity);
+  const {goNext} = usePoolsContext();
+  const setLiquidityValue = ( index: number, value: any) => {
+    setLiquidity((prev) => {
+      return prev.map((item, i) => {
+        if (i === index) {
+          return {
+            ...item,
+            liquidity: parseFloat(value),
+          };
+        }
+        return item;
+      });
+    });
+  };
   return (
     <Box py="24px" mx="auto" maxW={{ base: "100%", md: "540px" }}>
       <Box mb="32px" borderRadius="24px" p="24px" bg="brand.darkerBg">
-        <Text
-          borderTopRadius="8px"
-          mb="34px"
-          bg="#293d36"
-          w="100%"
-          p="16px 12px"
-          color="#fff"
-        >
-          Tokens and initial liquidity
+        <HStack spacing="12px" align="center">
+          <FaChevronLeft color="#EAFFF9" fontSize="20px" />
+          <Text fontWeight="600" fontSize="28px" color="#EAFFF9">
+            Set initial liquidity
+          </Text>
+        </HStack>
+        <Text my="20px" fontWeight={500} fontSize="16px" color="#C4AB30">
+          Optimized amount have been pre-filled
         </Text>
-        <VStack spacing="16px" align="flex-start">
-          {tokensLiquidity.map((item) => (
-            <Box w="100%">
-              <Flex flexDirection="row" mb="12px" justify={"space-between"}>
-                <TextStyle text={`${item?.percentage}% ${item?.token}`} />
-                <TextStyle text={item?.price} />
+        <VStack align="flex-start" spacing="10px">
+          {liquidity.map((token, index) => (
+            <Box
+              p="12px"
+              borderRadius="8px"
+              border="1px solid #EAFFF9"
+              w="100%"
+              key={index}
+            >
+              <Flex
+                align="center"
+                flexDir="row"
+                justify="space-between"
+                w="100%"
+              >
+                <HStack
+                  p="12px 8px"
+                  borderRadius="8px"
+                  border="1px solid #EAFFF9"
+                  align="center"
+                >
+                  {/* <Image /> */}
+                  <Text color="#EAFFF9" fontWeight="600" fontSize="23px">
+                    {token?.token} {token?.percentage}%
+                  </Text>
+                </HStack>
+                <Input
+                  color="white"
+                  textAlign="right"
+                  outline="none"
+                  border="none"
+                  maxW="150px"
+                  fontWeight="700"
+                  fontSize="28px"
+                  type="number"
+                  placeholder="0"
+                  min={0}
+                  max={token?.price}
+                  value={token?.liquidity}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setLiquidityValue(index, value);
+                  }}
+                />
               </Flex>
-              <Flex justify={"space-between"}>
-                <TextStyle text={`Initial Weight: ${item?.percentage}%`} />
-                <TextStyle fontWeight="400" text={`$${item?.weightPrice}`} />
-              </Flex>
+              <Text mt="20px" color="#A4C8BE" fontWeight="500" fontSize="19px">
+                Bal: {token?.price}{" "}
+                <Text
+                  as="span"
+                  color="brand.phanes"
+                  fontWeight="500"
+                  fontSize="19px"
+                  _hover={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setLiquidityValue(index, token?.price);
+                  }}
+                >
+                  Max
+                </Text>
+              </Text>
             </Box>
           ))}
-          <Flex mt="8px" w="100%" justify={"space-between"}>
-            <TextStyle text="Total" />
-            <TextStyle fontWeight="400" text={`$${totalWeightPrice}`} />
-          </Flex>
         </VStack>
-
-        <Text
-          borderTopRadius="8px"
-          mb="34px"
-          bg="#293d36"
-          w="100%"
-          p="16px 12px"
-          color="#fff"
-        >
-          Summary
+        <Flex mt="20px" justify="space-between" align="center">
+          <Text fontWeight="600" fontSize="23px" color="#EAFFF9">
+            Total
+          </Text>
+          <Text color="#fff" fontWeight="600" fontSize="28px">
+            $0.00
+          </Text>
+        </Flex>
+        <Text mt="20px" color="#A4C8BE" fontWeight="600" fontSize="23px">
+          Available Bal:{" "}
+          <Text
+            as="span"
+            color="brand.phanes"
+            fontWeight="500"
+            fontSize="19px"
+            _hover={{ cursor: "pointer" }}
+          >
+            {" "}
+            0.786
+          </Text>
         </Text>
-        <VStack w="100%" spacing="32px" align="flex-start">
-          <Flex w="100%" justify={"space-between"}>
-            <TextStyle text="Pool Name" />
-            <HStack align="center">
-              <TextStyle
-                fontWeight="400"
-                text={`${tokensLiquidity[0].token}-${tokensLiquidity[1].token}`}
-              />
-              <Box _hover={{ cursor: "pointer" }} onClick={() => setCurrentStep(1)}>
-                <BiEdit color="#EAFFF9" fontSize="21px" />
-              </Box>
-            </HStack>
-          </Flex>
-          <Flex w="100%" justify={"space-between"}>
-            <TextStyle text="Pool Symbol" />
-            <HStack align="center">
-              <TextStyle
-                fontWeight="400"
-                text={`${tokensLiquidity[0].token}-${tokensLiquidity[1].token}`}
-              />
-              <Box _hover={{ cursor: "pointer" }} onClick={() => setCurrentStep(1)}>
-                <BiEdit color="#EAFFF9" fontSize="21px" />
-              </Box>
-            </HStack>
-          </Flex>
-          <Flex w="100%" justify={"space-between"}>
-            <TextStyle text="Pool Type" />
-            <TextStyle
-              fontWeight="400"
-              text={poolType === "weighted_pool" ? "Weighted" : "Stable"}
-            />
-          </Flex>
-          <Flex w="100%" justify={"space-between"}>
-            <TextStyle text="Swap Fees" />
-            <HStack align="center">
-              <TextStyle fontWeight="400" text={`${poolFees}%`} />
-              <Box _hover={{ cursor: "pointer" }} onClick={goBack}>
-                <BiEdit color="#EAFFF9" fontSize="21px" />
-              </Box>
-            </HStack>
-          </Flex>
-        </VStack>
-        <Button
-          border="1px solid #1bd19c"
-          borderRadius="8px"
-          bg="#1BD19C"
-          py="27px"
-          fontSize="23px"
-          fontWeight="600"
-          color="white"
-          w="100%"
-          mt="24px"
-          // disabled={!poolFees}
-          onClick={goNext}
-        >
-          Approve ETH for adding liquidity
-        </Button>
+        <Flex mt="28px" color="#EAFFF9" align="center" gap="12px">
+          <AiOutlineInfoCircle />
+          <Text fontSize="16px" fontWeight="400">
+            Auto optimize liquidity
+          </Text>
+          <Switch colorScheme="green" />
+        </Flex>
+        <ModalCTABtn text="Preview" onClick={goNext} />
       </Box>
     </Box>
   );

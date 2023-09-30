@@ -76,3 +76,29 @@ export const FilledFullButton = ({
     </Button>
   );
 };
+type IModalCTABtn = {
+  onClick?: () => void;
+  text: string;
+  disabled?: boolean;
+};
+export const ModalCTABtn = ({
+  onClick,
+  text,
+  disabled
+}: IModalCTABtn) => {
+  return (<Button
+    border="1px solid #1bd19c"
+    borderRadius="8px"
+    bg="#1BD19C"
+    py="27px"
+    fontSize="23px"
+    fontWeight="600"
+    color="white"
+    w="100%"
+    mt="24px"
+    disabled={disabled}
+    onClick={onClick}
+  >
+    {text}
+  </Button>)
+};

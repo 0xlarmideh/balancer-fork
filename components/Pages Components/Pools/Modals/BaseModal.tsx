@@ -16,10 +16,7 @@ const BaseModal = ({
   onWeightedOpen,
   onStableOpen,
 }: IModalProps) => {
-  const { setCurrentStep, currentStep, updatePoolDetail } = usePoolsContext();
-  useEffect(() => {
-    console.log(currentStep);
-  }, [currentStep]);
+  const { setCurrentStep, updatePoolDetail } = usePoolsContext();
 
   const ModalContent = () => {
     type ModalContent = {
