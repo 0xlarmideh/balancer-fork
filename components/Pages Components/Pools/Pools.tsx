@@ -17,31 +17,26 @@ import PoolTable from "./PoolTable";
 import BaseModal from "./Modals/BaseModal";
 import { usePoolsContext } from "@/context/PoolsContext";
 import Step1 from "./Modals/weighted/Step1";
+import CustomModal from "@/components/_common/CustomModal";
+import Step2 from "./Modals/weighted/Step2";
 
 const Pools = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { setCurrentStep, currentStep, poolType } = usePoolsContext();
+  const {
+    isOpen: isWeightedOpen,
+    onClose: onWeightedClose,
+    onOpen: onWeightedOpen,
+  } = useDisclosure();
+  const { setCurrentStep, currentStep, poolDetails, updatePoolDetail } = usePoolsContext();
 
-  let currentModal;
-  switch (poolType) {
-    case "weighted_pool":
-      switch (currentStep) {
-        case 1:
-          currentModal = (
-            <>
-              <Step1 isOpen={isOpen} onClose={onClose} />
-            </>
-          );
-          break;
-
-        default:
-          break;
-      }
-      break;
-
-    default:
-      break;
-  }
+  const PoolsModals = {
+    weighted_pool: {
+      1: <Step1 />,
+    },
+    stable_pool: {
+      // 1: <Step1 />
+    },
+  };
 
   return (
     <Box pb="12rem">
@@ -73,10 +68,32 @@ const Pools = () => {
         />
       </Flex>
       <PoolTable />
-      {currentStep === 0 && <BaseModal isOpen={isOpen} onClose={onClose} key="step0" />}
-      <>
-      {currentModal}
-      </>
+      {currentStep === 0 && (
+        <BaseModal
+          isOpen={isOpen}
+          onClose={() => {
+            onClose();
+            setCurrentStep(0);
+            updatePoolDetail('poolType' ,null);
+          }}
+          onWeightedOpen={onWeightedOpen}
+          key="step0"
+        />
+      )}
+      {poolDetails?.poolType === "weighted_pool" && (
+        <CustomModal
+          isOpen={isWeightedOpen}
+          onClose={() => {
+            onWeightedClose();
+            setCurrentStep(0);
+            updatePoolDetail("poolType", null);
+          }}
+          maxW={{ base: "100%", md: "1174px" }}
+        >
+          {currentStep === 1 && <Step1 />}
+          {currentStep === 2 && <Step2 />}
+        </CustomModal>
+      )}
     </Box>
   );
 };

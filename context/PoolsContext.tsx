@@ -2,18 +2,23 @@
 import React, { Dispatch, SetStateAction, useState, useContext, Children } from "react";
 export type poolType = "weighted_pool" | "stable_pool" | null;
 
+type IPoolFormType = {
+  poolType: poolType;
+  poolFees: number | null;
+}
+
 type PoolsContextType = {
-  // formValues: any;
-  // updateFormField: (
-  //   fieldName: keyof xxx,
-  //   value: any
-  // ) => void;
+  poolDetails: IPoolFormType;
+  updatePoolDetail: (fieldName: keyof IPoolFormType, value: any) => void;
   currentStep: number;
   setCurrentStep: Dispatch<SetStateAction<number>>;
   goBack: () => void;
   goNext: () => void;
-  poolType: poolType;
-  setPoolType: (pool: poolType) => void;
+};
+
+const initialData: IPoolFormType = {
+  poolType: null,
+  poolFees: null,
 };
 
 export const PoolStateContext =
@@ -25,19 +30,16 @@ export const PoolStateContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const [poolType, setPoolType] = useState<poolType>(null)
-  // const [formValues, setFormValues] =
-  //   useState<any>(initialData);
-
-  // const updateFormField = (
-  //   fieldName: keyof xxx,
-  //   value: any
-  // ) => {
-  //   setFormValues((prevData) => ({
-  //     ...prevData,
-  //     [fieldName]: value,
-  //   }));
-  // };
+  const [poolDetails, setPoolDetails] = useState<IPoolFormType>(initialData)
+  const updatePoolDetail = (
+    fieldName: keyof IPoolFormType,
+    value: any
+  ) => {
+    setPoolDetails((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+  };
 
   const goBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
@@ -47,14 +49,13 @@ export const PoolStateContextProvider = ({
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
-  const contextValue:PoolsContextType = {
-    // formValues,
+  const contextValue: PoolsContextType = {
+    poolDetails,
+    updatePoolDetail,
     currentStep,
     setCurrentStep,
     goBack,
     goNext,
-    poolType,
-    setPoolType
   };
 
   return (
@@ -77,14 +78,13 @@ export const usePoolsContext = () => {
   return context;
 };
 
-export function withPoolsContextProvider<T>(
+export function withPoolsContextProvider(
   Component: React.ReactNode
 ) {
-  return function withPoolsContextProvider(props: T) {
+  return function withPoolsContextProvider() {
     return (
       <PoolStateContextProvider>
-        {/* <Component {...props} /> */}
-        {Component}
+        { Component }
       </PoolStateContextProvider>
     );
   };

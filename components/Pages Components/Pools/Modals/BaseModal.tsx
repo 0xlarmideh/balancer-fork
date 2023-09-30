@@ -7,29 +7,39 @@ import CustomStepper from "@/components/_common/CustomStepper";
 export interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onWeightedOpen?: () => void;
+  onStableOpen?: () => void;
 }
-const BaseModal = ({ isOpen, onClose }:IModalProps) => {
-  const {setCurrentStep, currentStep, setPoolType} = usePoolsContext()
+const BaseModal = ({
+  isOpen,
+  onClose,
+  onWeightedOpen,
+  onStableOpen,
+}: IModalProps) => {
+  const { setCurrentStep, currentStep, updatePoolDetail } = usePoolsContext();
   useEffect(() => {
-console.log(currentStep)
-  }, [currentStep])
-  
+    console.log(currentStep);
+  }, [currentStep]);
+
   const ModalContent = () => {
     type ModalContent = {
       title: string;
       description: string;
-      poolType: poolType
-    }
-    const ModalContentData:ModalContent[] = [
+      poolType: poolType;
+      function?: () => void;
+    };
+    const ModalContentData: ModalContent[] = [
       {
         title: "Create a weighted pool",
         description: "Best for unrelated assets e.g WETH/Metis",
-        poolType: 'weighted_pool'
+        poolType: "weighted_pool",
+        function: onWeightedOpen,
       },
       {
         title: "Create a stable pool",
         description: "Best for related assets e.g WETH/rETH",
-        poolType: 'stable_pool'
+        poolType: "stable_pool",
+        function: onStableOpen,
       },
     ];
     return (
@@ -52,7 +62,9 @@ console.log(currentStep)
                 }}
                 onClick={() => {
                   // function goes here
-                  setPoolType(item?.poolType);
+                  onClose()
+                  updatePoolDetail('poolType' ,item?.poolType);
+                  item?.function && item?.function();
                   setCurrentStep(1);
                 }}
                 key={idx}
@@ -79,15 +91,14 @@ console.log(currentStep)
     );
   };
   return (
-    <>
-      <CustomModal
-        content={<ModalContent />}
-        isOpen={isOpen}
-        maxW={{ base: "100%", md: "480px" }}
-        onClose={onClose}
-        key="Step-1"
-      />
-    </>
+    <CustomModal
+      isOpen={isOpen}
+      maxW={{ base: "100%", md: "480px" }}
+      onClose={onClose}
+      key="Step-1"
+    >
+      <ModalContent />
+    </CustomModal>
   );
 };
 
