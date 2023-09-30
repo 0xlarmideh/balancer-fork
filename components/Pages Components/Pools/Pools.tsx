@@ -19,6 +19,7 @@ import { usePoolsContext } from "@/context/PoolsContext";
 import Step1 from "./Modals/weighted/Step1";
 import CustomModal from "@/components/_common/CustomModal";
 import Step2 from "./Modals/weighted/Step2";
+import Step3 from "./Modals/weighted/Step3";
 
 const Pools = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -74,7 +75,7 @@ const Pools = () => {
           onClose={() => {
             onClose();
             setCurrentStep(0);
-            updatePoolDetail('poolType' ,null);
+            updatePoolDetail("poolType", null);
           }}
           onWeightedOpen={onWeightedOpen}
           key="step0"
@@ -92,6 +93,7 @@ const Pools = () => {
         >
           {currentStep === 1 && <Step1 />}
           {currentStep === 2 && <Step2 />}
+          {currentStep === 3 && <Step3 />}
         </CustomModal>
       )}
     </Box>

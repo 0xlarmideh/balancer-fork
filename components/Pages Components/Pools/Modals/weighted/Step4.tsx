@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, VStack } from "@chakra-ui/react";
 
 const Step4 = () => {
   return (
@@ -8,6 +8,9 @@ const Step4 = () => {
         <Text mb='34px' bg="#293d36" w="100%" p="16px 12px" color="#fff">
           Tokens and initial liquidity
         </Text>
+        <VStack spacing='12px' align='flex-start'>
+
+        </VStack>
       </Box>
     </Box>
   );
