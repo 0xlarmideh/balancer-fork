@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react"
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
+// import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
 interface IButtonProps {
   onClick?: () => void;
@@ -9,7 +9,7 @@ interface IButtonProps {
   color?: string;
   width?: any;
   isLoading?: boolean;
-  leftIcon?: ReactJSXElement;
+  leftIcon?: any;
   px?: any;
 }
 
