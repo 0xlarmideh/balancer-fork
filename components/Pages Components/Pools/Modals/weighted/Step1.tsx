@@ -7,12 +7,17 @@ import {
   VStack,
   Button,
   HStack,
+  Wrap,
 } from "@chakra-ui/react";
 import { SmallText } from "@/components/_common/Typography";
 import ETHLogo from "@/public/icons/eth.svg";
+import DeleteIcon from "@/public/icons/delete.svg";
+import LockIcon from "@/public/icons/lock.svg";
 import Image from "next/image";
 import { usePoolsContext } from "@/context/PoolsContext";
 import { ModalCTABtn } from "@/components/_common/Buttons";
+import {IoIosArrowDown} from "react-icons/io"
+import { BsCheckCircleFill } from "react-icons/bs"
 
 const Step1 = () => {
   const data = {
@@ -38,8 +43,8 @@ const Step1 = () => {
         gap="32px"
       >
         <Flex justify="space-between">
-          <SmallText text="Token" />
-          <SmallText text="Weight" />
+          <SmallText text="Token" color="#EAFFF9" />
+          <SmallText text="Weight" color="#EAFFF9" />
         </Flex>
         <Flex flexDir="column" gap="10px" color="white" justify="space-between">
           {Array(4)
@@ -51,12 +56,27 @@ const Step1 = () => {
                 py="14px"
                 border="1px solid #A4C8BE"
                 rounded="8px"
-                _hover={{ cursor: "pointer" }}
                 key={index}
               >
-                <HStack>
+                <HStack _hover={{ cursor: "pointer" }} align="center">
                   <Image src={ETHLogo} alt="token" />
-                  <Text>{item?.token}</Text>
+                  <Text fontSize="23px" fontWeight="600">
+                    {item?.token}
+                  </Text>
+                  <IoIosArrowDown />
+                </HStack>
+                <HStack align="center" spacing="60px">
+                  <Text fontSize="23px" fontWeight="500">
+                    {item?.percentage}%
+                  </Text>
+                  <HStack align="center" spacing="10px">
+                    <Wrap _hover={{ cursor: "pointer" }} onClick={() => {}}>
+                      <Image src={LockIcon} alt="lock token" />
+                    </Wrap>
+                    <Wrap _hover={{ cursor: "pointer" }} onClick={() => {}}>
+                      <Image src={DeleteIcon} alt="delete" />
+                    </Wrap>
+                  </HStack>
                 </HStack>
               </Flex>
             ))}
@@ -71,10 +91,42 @@ const Step1 = () => {
             Add new
           </Button>
         </Box>
-        <ModalCTABtn
-          onClick={goNext}
-          text='Next'
-        />
+        <ModalCTABtn onClick={goNext} text="Next" />
+        <Box>
+          <HStack
+            border="1px solid #FFD923"
+            rounded="4px"
+            p="8px 12px"
+            align="flex-start"
+            bg="#FFFDF1"
+            mb="12px"
+          >
+            <Wrap mt="2px">
+              <BsCheckCircleFill fontSize="13px" color="#FFD923" />
+            </Wrap>
+            <Text fontWeight="600" fontSize="13px" color="#010D09">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu sed
+              accumsan malesuada amet odio. Sagittis, nec morbi interdum nisl
+              mattis nibh. Laoreet nullam vestibulum cursus est.{" "}
+            </Text>
+          </HStack>
+          <HStack
+            border="1px solid #D82122"
+            rounded="4px"
+            p="8px 12px"
+            align="flex-start"
+            bg="#FFE2E2"
+          >
+            <Wrap mt="2px">
+              <BsCheckCircleFill fontSize="13px" color="#D82122" />
+            </Wrap>
+            <Text fontWeight="600" fontSize="13px" color="#010D09">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu sed
+              accumsan malesuada amet odio. Sagittis, nec morbi interdum nisl
+              mattis nibh. Laoreet nullam vestibulum cursus est.{" "}
+            </Text>
+          </HStack>
+        </Box>
       </Flex>
     </Box>
   );

@@ -47,6 +47,13 @@ const Pools = () => {
     { title: "Set initial liquidity", subtitle: "" },
   ];
 
+  const modalContentRef = React.useRef<any>();
+  React.useEffect(() => {
+    if (currentStep) {
+      modalContentRef.current?.scrollTo(0, 0);
+    }
+  }, [currentStep]);
+
   return (
     <Box pb="12rem">
       <MediumText text="OpBnB pools" />
@@ -92,6 +99,7 @@ const Pools = () => {
       {poolDetails?.poolType === "weighted_pool" && (
         <CustomModal
           isOpen={isWeightedOpen}
+          isCentered
           onClose={() => {
             onWeightedClose();
             setCurrentStep(0);
@@ -100,20 +108,34 @@ const Pools = () => {
           }}
           maxW={{ base: "100%", md: "1174px" }}
         >
-          <Text mt='70px' fontSize='28px' textAlign='center' fontWeight='600' color='#fff'>Create a Weighted Pool</Text>
-          <CustomStepper currentStep={currentStep} data={data} stepTitle="Choose tokens and weight" />
-          {currentStep === 1 && <Step1 />}
-          {currentStep === 2 && (
-            <>
-              {!showDetails ? (
-                <Step2 setShowDetails={setShowDetails} />
-              ) : (
-                <Step2Details setShowDetails={setShowDetails} />
-              )}
-            </>
-          )}
-          {currentStep === 3 && <Step3 />}
-          {/* {currentStep === 4 && <Step4 />} */}
+          <Box ref={modalContentRef}>
+            <Text
+              mt="70px"
+              fontSize="28px"
+              textAlign="center"
+              fontWeight="600"
+              color="#fff"
+            >
+              Create a Weighted Pool
+            </Text>
+            <CustomStepper
+              currentStep={currentStep}
+              data={data}
+              stepTitle="Choose tokens and weight"
+            />
+            {currentStep === 1 && <Step1 />}
+            {currentStep === 2 && (
+              <>
+                {!showDetails ? (
+                  <Step2 setShowDetails={setShowDetails} />
+                ) : (
+                  <Step2Details setShowDetails={setShowDetails} />
+                )}
+              </>
+            )}
+            {currentStep === 3 && <Step3 />}
+            {/* {currentStep === 4 && <Step4 />} */}
+          </Box>
         </CustomModal>
       )}
     </Box>

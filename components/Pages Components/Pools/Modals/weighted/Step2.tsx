@@ -22,7 +22,13 @@ const Step2 = ({ setShowDetails }: IStep2) => {
   const initialSwapFees = [0.1, 0.3, 1.1, 1.2];
   return (
     <Box py="24px" mx="auto" maxW={{ base: "100%", md: "540px" }}>
-      <Box mb="32px" borderRadius="24px" p="24px" bg="brand.darkerBg">
+      <Box
+        boxShadow="12px 12px 72px 0px rgba(27, 209, 156, 0.50)"
+        mb="32px"
+        borderRadius="24px"
+        p="24px"
+        bg="brand.darkerBg"
+      >
         <HStack spacing="12px" align="center" mb="42px">
           <FaChevronLeft color="#EAFFF9" fontSize="20px" />
           <Text fontWeight="600" fontSize="28px" color="#EAFFF9">

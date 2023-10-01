@@ -27,7 +27,13 @@ const Step3 = () => {
   };
   return (
     <Box py="24px" mx="auto" maxW={{ base: "100%", md: "540px" }}>
-      <Box mb="32px" borderRadius="24px" p="24px" bg="brand.darkerBg">
+      <Box
+        boxShadow="12px 12px 72px 0px rgba(27, 209, 156, 0.50)"
+        mb="32px"
+        borderRadius="24px"
+        p="24px"
+        bg="brand.darkerBg"
+      >
         <HStack spacing="12px" align="center">
           <FaChevronLeft color="#EAFFF9" fontSize="20px" />
           <Text fontWeight="600" fontSize="28px" color="#EAFFF9">
@@ -64,7 +70,7 @@ const Step3 = () => {
                   </Text>
                 </HStack>
                 <Input
-                variant='unstyled'
+                  variant="unstyled"
                   color="white"
                   textAlign="right"
                   maxW="150px"

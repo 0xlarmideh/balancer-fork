@@ -32,7 +32,13 @@ const Step2Details = ({setShowDetails}:IStep2) => {
   );
   return (
     <Box py="24px" mx="auto" maxW={{ base: "100%", md: "540px" }}>
-      <Box mb="32px" borderRadius="24px" p="24px" bg="brand.darkerBg">
+      <Box
+        boxShadow="12px 12px 72px 0px rgba(27, 209, 156, 0.50)"
+        mb="32px"
+        borderRadius="24px"
+        p="24px"
+        bg="brand.darkerBg"
+      >
         <Text
           borderTopRadius="8px"
           mb="34px"
