@@ -1,7 +1,0 @@
-const SwapPage = () => {
-  return (
-    <></>
-  )
-}
-
-SwapPage
