@@ -22,6 +22,7 @@ import Step2 from "./Modals/weighted/Step2";
 import Step3 from "./Modals/weighted/Step3";
 import Step2Details from "./Modals/weighted/Step2Details";
 import { useState } from "react";
+import CustomStepper from "@/components/_common/CustomStepper";
 
 const Pools = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -38,6 +39,13 @@ const Pools = () => {
     updatePoolDetail,
     clearPoolDetail,
   } = usePoolsContext();
+
+  const data = [
+    { title: "Create tokens ", subtitle: "" },
+    { title: "Set pool fees", subtitle: "" },
+    { title: "Set initial liquidity", subtitle: "" },
+    { title: "Set initial liquidity", subtitle: "" },
+  ];
 
   return (
     <Box pb="12rem">
@@ -92,6 +100,8 @@ const Pools = () => {
           }}
           maxW={{ base: "100%", md: "1174px" }}
         >
+          <Text mt='70px' fontSize='28px' textAlign='center' fontWeight='600' color='#fff'>Create a Weighted Pool</Text>
+          <CustomStepper currentStep={currentStep} data={data} stepTitle="Choose tokens and weight" />
           {currentStep === 1 && <Step1 />}
           {currentStep === 2 && (
             <>

@@ -10,6 +10,8 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 const Step3 = () => {
   const [liquidity, setLiquidity] = useState(tokensLiquidity);
   const {goNext} = usePoolsContext();
+
+  // Set Liquidity value
   const setLiquidityValue = ( index: number, value: any) => {
     setLiquidity((prev) => {
       return prev.map((item, i) => {
@@ -62,10 +64,9 @@ const Step3 = () => {
                   </Text>
                 </HStack>
                 <Input
+                variant='unstyled'
                   color="white"
                   textAlign="right"
-                  outline="none"
-                  border="none"
                   maxW="150px"
                   fontWeight="700"
                   fontSize="28px"

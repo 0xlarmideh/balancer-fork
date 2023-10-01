@@ -1,6 +1,4 @@
-import CustomModal from "@/components/_common/CustomModal";
 import React from "react";
-import { IModalProps } from "../BaseModal";
 import {
   Box,
   Text,
@@ -14,6 +12,7 @@ import { SmallText } from "@/components/_common/Typography";
 import ETHLogo from "@/public/icons/eth.svg";
 import Image from "next/image";
 import { usePoolsContext } from "@/context/PoolsContext";
+import { ModalCTABtn } from "@/components/_common/Buttons";
 
 const Step1 = () => {
   const data = {
@@ -72,18 +71,10 @@ const Step1 = () => {
             Add new
           </Button>
         </Box>
-        <Button
-          border="1px solid #1bd19c"
-          borderRadius="8px"
-          bg="#1BD19C"
-          py='27px'
-          fontSize='23px'
-          fontWeight='600'
-          color="white"
+        <ModalCTABtn
           onClick={goNext}
-        >
-          Next
-        </Button>
+          text='Next'
+        />
       </Flex>
     </Box>
   );

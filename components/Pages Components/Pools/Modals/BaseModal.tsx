@@ -93,6 +93,7 @@ const BaseModal = ({
       maxW={{ base: "100%", md: "480px" }}
       onClose={onClose}
       key="Step-1"
+      isCentered
     >
       <ModalContent />
     </CustomModal>

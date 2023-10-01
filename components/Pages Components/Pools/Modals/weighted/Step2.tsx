@@ -11,10 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { FaChevronLeft } from "react-icons/fa";
 export type IStep2 = {
-  setShowDetails: (value: boolean) => void
-}
-const Step2 = ({setShowDetails}:IStep2) => {
-  const {goNext, updatePoolDetail, poolDetails: {poolFees}} = usePoolsContext()
+  setShowDetails: (value: boolean) => void;
+};
+const Step2 = ({ setShowDetails }: IStep2) => {
+  const {
+    goNext,
+    updatePoolDetail,
+    poolDetails: { poolFees },
+  } = usePoolsContext();
   const initialSwapFees = [0.1, 0.3, 1.1, 1.2];
   return (
     <Box py="24px" mx="auto" maxW={{ base: "100%", md: "540px" }}>
@@ -34,10 +38,11 @@ const Step2 = ({setShowDetails}:IStep2) => {
         </Text>
         {/* Set initial swap fees */}
         <Flex gap="12px" mb="36px">
-          {initialSwapFees.map((fee) => {
+          {initialSwapFees.map((fee, index) => {
             const color = poolFees === fee ? "#1BD19C" : "#EAFFF9";
             return (
               <Box
+                key={index}
                 fontWeight="600"
                 fontSize="23px"
                 color={color}

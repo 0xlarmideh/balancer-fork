@@ -1,59 +1,62 @@
-import {
-  Box,
-  Step,
-  StepDescription,
-  StepIcon,
-  StepIndicator,
-  StepNumber,
-  StepSeparator,
-  StepStatus,
-  StepTitle,
-  Stepper,
-  useSteps,
-  Flex,
-  Text
-} from "@chakra-ui/react";
+import React from "react";
+import { Box, Center, Flex, Divider, Text } from "@chakra-ui/react";
 
-const steps = [
-  { title: "First", description: "Contact Info" },
-  { title: "Second", description: "Date & Time" },
-  { title: "Third", description: "Select Rooms" },
-];
-
-function CustomStepper() {
-  const { activeStep } = useSteps({
-    index: 1,
-    count: steps.length,
-  });
-
+interface ICustomStepper {
+  data: any[];
+  currentStep: number;
+  stepTitle: string;
+}
+const CustomStepper = ({ data, currentStep, stepTitle }: ICustomStepper) => {
+  const Steps = Array.from(
+    { length: data?.length },
+    (item, index) => (item = index + 1)
+  );
   return (
-    <Box pt='24px' px="14px">
-      <Stepper colorScheme="green" color='white' py='0' m='0' index={activeStep} gap='0'>
-        {steps.map((step, index) => (
-          <Step key={index} >
-            <Flex flexDir="column" justify="center">
-              <StepIndicator>
-                <StepStatus
-                  complete={<StepNumber />}
-                  incomplete={<StepNumber />}
-                  active={<StepNumber />}
-                />
-              </StepIndicator>
-              <Box flexShrink="0">
-                {/* <StepDescription>{step.description}</StepDescription> */}
-              </Box>
-            </Flex>
-            <StepSeparator />
-          </Step>
-        ))}
-      </Stepper>
-      <Flex m='0' pt='12px' justify='space-between'>
-        {steps.map((step, index) => (
-          <Text color={activeStep === index+1 ? 'brand.phanes' : 'white'}>{step.title}</Text>
+    <Flex flexDir="column" mx="auto" maxW="850px" my="32px">
+      <Flex mb="26px" w="100%" justify="space-between" px="30px" align="center">
+        {Steps.map((step, index) => (
+          <Flex
+            w={data?.length !== index + 1 ? "100%" : "fit-content"}
+            align="center"
+            key={index}
+          >
+            <Center
+              color="#fff"
+              mx="10px" px='12px'
+              border="1px solid #EAFFF9"
+              rounded="full"
+              bg={currentStep === step ? "brand.phanes" : "transparent"}
+              w="25px"
+              h="25px"
+            >
+              {step}
+            </Center>
+            <Divider
+              display={data?.length !== index + 1 ? "block" : "none"}
+              variant="dashed"
+              w="100%"
+            />
+          </Flex>
         ))}
       </Flex>
-    </Box>
+      <Flex justify={"space-between"} align="center">
+        {data.map((item, index) => (
+          <Text
+            color={currentStep === index+1 ? "brand.phanes" : "#fff"}
+            key={index}
+            fontWeight='600'
+            fontSize='19px'
+          >
+            {item?.title}
+          </Text>
+        ))}
+      </Flex>
+      <Divider my="26px" />
+      <Text textAlign="center" fontWeight="600" fontSize="25px" color="#fff">
+        {stepTitle}
+      </Text>
+    </Flex>
   );
-}
+};
 
-export default CustomStepper
+export default CustomStepper;

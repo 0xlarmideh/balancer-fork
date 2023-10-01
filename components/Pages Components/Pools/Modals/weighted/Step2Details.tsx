@@ -46,8 +46,8 @@ const Step2Details = ({setShowDetails}:IStep2) => {
           Tokens and initial liquidity
         </Text>
         <VStack spacing="16px" align="flex-start">
-          {tokensLiquidity.map((item) => (
-            <Box w="100%">
+          {tokensLiquidity.map((item, index) => (
+            <Box key={index} w="100%">
               <Flex flexDirection="row" mb="12px" justify={"space-between"}>
                 <TextStyle text={`${item?.percentage}% ${item?.token}`} />
                 <TextStyle text={item?.price} />
